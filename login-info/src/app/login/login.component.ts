@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserlistService } from '../service/userlist.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private userlistService: UserlistService
+    private userlistService: UserlistService,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit(): void {
@@ -35,8 +37,9 @@ export class LoginComponent implements OnInit {
         console.log('login result = ' + JSON.stringify(response));
         var login_response = JSON.parse(JSON.stringify(response)); 
         if (login_response.result == 'OK') {
+          this.cookieService.set('user-id',this.loginForm.value.firstName);
           console.log('trying to navigate');
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard/']);
         } else {
           // say wrong password and stay in login page.
           console.log('Wrong username or password');

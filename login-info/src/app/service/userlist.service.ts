@@ -40,4 +40,9 @@ export class UserlistService {
     console.log('userlistsvc: returning value from checkpassword ' + success);
     return promise;
   }
+
+  getUserList():any {
+      const promise = firstValueFrom(this._httpClient.get('http://localhost:3000/api/user'));
+      return promise;
+  }
 }

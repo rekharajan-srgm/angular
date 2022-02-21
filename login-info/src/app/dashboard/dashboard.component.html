@@ -12,18 +12,17 @@
   </nav>
 <div class="d-flex p-1">  
     <div class="p-5"><img src="../../assets/285655_user_icon.png" width="50%" height="60%"/>
-        <p> Welcome User!<!--{{firstName}}--></p></div></div>
+        <h1> Welcome {{firstName}}</h1></div></div>
         <div class="p-5">
-          <table class="table">
+          <table class="table">   
           <tr>
               <th scope="col">User Name</th>
               <th scope="col">Online</th>
           </tr>
-          <!--<tr>*ngFor="let user of users"</tr>>-->
-          <tr>
-              <td scope="row"><!--{{user.name}}--></td>
-             <!-- <td scope="row"><img width="20px" height="20px" [src]="user.online ? './assets/online.jpeg' : './assets/offline.jpeg'"/></td>-->
-             <td scope="row"><img width="20px" height="20px" [src]="'./assets/online.jpeg'"/></td>
+          <!-- https://zeroesandones.medium.com/how-to-populate-an-html-table-dynamically-using-ngfor-in-angular-9-26d4d9f2023 -->
+          <tr *ngFor="let user of users">
+              <td scope="row">{{user.firstName}}</td>
+             <td scope="row"><img width="40px" height="40px" [src]="'./assets/online.png'"/></td>
           </tr>
       </table>
   </div>
