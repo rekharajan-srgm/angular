@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+body {
+    background: url('./assets/hand-painted-watercolor-pastel-sky-background_23-2148902771.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .container {
+    margin-top: 10%;
+  }
