@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
+import { first, firstValueFrom } from 'rxjs';
+import { trusted } from 'mongoose';
+import { userInfo } from 'os';
 
 let header = new HttpHeaders();
 header.set('Access-Control-Allow-Origin', '*');
@@ -38,6 +40,16 @@ export class UserlistService {
 
     const promise = firstValueFrom( this._httpClient.get(geturl));
     console.log('userlistsvc: returning value from checkpassword ' + success);
+    return promise;
+  }
+
+updateUser(firstName:String,data:any):any{
+const promise=firstValueFrom(this._httpClient.put("http://localhost:3000/api/user/"+firstName,{lastName:data.lastName,email:data.email}));
+return promise;
+console.log("this is"+JSON.stringify(firstName));
+}
+  deleteUser(firstName:String):any{
+    const promise = firstValueFrom(this._httpClient.delete("http://localhost:3000/api/user/"+firstName));
     return promise;
   }
 

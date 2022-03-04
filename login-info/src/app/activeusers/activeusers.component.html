@@ -1,0 +1,22 @@
+ 
+     <h1 class="text-center">Activeusers</h1>
+     <div class="p-5">
+         <table class="table">   
+         <tr>
+             <th scope="col">User Name</th>
+             <th scope="col">List of Users</th>
+         </tr>
+   
+         <tr *ngFor="let user of users">
+             
+             <td scope="row">{{user.firstName}}</td>
+            <td scope="row"><img width="40px" height="40px" [src]="'./assets/online.png'"></td>
+         <!--  <td *ngIf="!onlineflag" scope="row"><img width="40px" height="40px" [src]="./assets/offline.jpeg"/></td>-->
+         </tr>
+     </table>
+   
+   </div>
+   
+   
+   
+ 

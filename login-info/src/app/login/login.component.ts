@@ -37,7 +37,9 @@ export class LoginComponent implements OnInit {
         console.log('login result = ' + JSON.stringify(response));
         var login_response = JSON.parse(JSON.stringify(response)); 
         if (login_response.result == 'OK') {
+          //set cookies
           this.cookieService.set('user-id',this.loginForm.value.firstName);
+
           console.log('trying to navigate');
           this.router.navigate(['/dashboard/']);
         } else {

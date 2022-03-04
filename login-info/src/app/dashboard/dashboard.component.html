@@ -1,29 +1,58 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-custom-gradient" style="font-size:1.5rem">
-    <a class="navbar-brand logo" href="#">Hello User!</a>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/table" routerLinkActive="active"
-          >Active users</a>
-      </li>
-    </ul>
-    <button (click)="onSignout()" class="btn btn-outline-primary" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
-      Sign out
-    </button>
-  </nav>
-<div class="d-flex p-1">  
-    <div class="p-5"><img src="../../assets/285655_user_icon.png" width="50%" height="60%"/>
-        <h1> Welcome {{firstName}}</h1></div></div>
-        <div class="p-5">
-          <table class="table">   
-          <tr>
-              <th scope="col">User Name</th>
-              <th scope="col">Online</th>
-          </tr>
-          <!-- https://zeroesandones.medium.com/how-to-populate-an-html-table-dynamically-using-ngfor-in-angular-9-26d4d9f2023 -->
-          <tr *ngFor="let user of users">
-              <td scope="row">{{user.firstName}}</td>
-             <td scope="row"><img width="40px" height="40px" [src]="'./assets/online.png'"/></td>
-          </tr>
-      </table>
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="d-flex flex-direction-column">
+    <a class="navbar-brand" href="#">
+      <img src="../../assets/door-logo-home.jpg" alt="" width="35" height="35" class="d-inline-block align-text-top">
+      HomePage
+    </a>
+    <ul class="navbar-nav nav-item">
+       <li><a class="nav-link active h5" aria-current="page" routerLink="/dashboard" routerLinkActive="active">Active Users</a></li></ul></div>
+      
+      <div class="nav-item"> 
+        <span class=""><button (click)="onSignout()" class="btn btn-outline-dark" type="button"  style="padding: .45rem 1.5rem .35rem;font-size: x-large;">
+          Sign out
+        </button></span>
+      </div>
   </div>
-    
+</nav>
+  <div class="d-flex p-1">  
+    <div class="p-5"><img src="../../assets/285655_user_icon.png" width="30%" height="50%"/>
+        <h2> Welcome {{firstName}}</h2></div></div>
+        <div class="p-5">
+          <h2 class="head">User Details</h2>
+          <table mat-table [dataSource]="users" class="mat-elevation-z8" #userlistTable>
+ 
+           
+            <ng-container matColumnDef="firstName">
+              <th mat-header-cell *matHeaderCellDef> FirstName</th>
+              <td mat-cell *matCellDef="let user"> {{user.firstName}} </td>
+            </ng-container>
+           
+            <ng-container matColumnDef="lastName">
+              <th mat-header-cell *matHeaderCellDef> LastName </th>
+              <td mat-cell *matCellDef="let user"> {{user.lastName}} </td>
+            </ng-container>
+           
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef> Email </th>
+              <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Edit">
+              <th mat-header-cell *matHeaderCellDef>Edit</th>
+              <td mat-cell *matCellDef="let i = index"> 
+              <button mat-button class="btn btn-warning fs-6" type="button" (click)="onEdit(i)">Update</button></td>
+            </ng-container>
+
+            <ng-container matColumnDef="Delete">
+              <th mat-header-cell *matHeaderCellDef>Delete</th>
+              <td mat-cell *matCellDef="let i = index"> 
+              <button mat-icon-button class="btn btn-danger" type="button" (click)="onRemove(i)"><mat-icon>delete</mat-icon></button></td>
+             
+            </ng-container>
+           
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        
+          </div>
