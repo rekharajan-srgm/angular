@@ -24,7 +24,7 @@ const userSchema=new mongoose.Schema({
           type:Boolean,
           required:true,
           default:false
-      },
+      } 
 });
 // registering my schema for further use in application
 module.exports=mongoose.model('User',userSchema);

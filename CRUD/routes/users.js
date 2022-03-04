@@ -17,12 +17,17 @@ router.get("/validate/:username/:password", async (req, res) => {
   const username = req.params.username;
   const password = req.params.password;
   try {
-    const result = await User.find({ firstName: username, password: password });
-    if (result.length == 1) {
-      res.send("{\"result\":\"OK\"}");
+    // select * from user where username=firstname and pswd = pswd;
+    const user_Object = await User.find({
+      firstName: username,
+      password: password,
+    });
+    if (user_Object.length == 1) {
+      res.send('{"result":"OK"}');
+      console.log(user_Object);
     } else {
       res.status(503);
-      res.send("{\"result\":\"Authentication failed\"}");
+      res.send('{"result":"Authentication failed"}');
     }
   } catch (err) {
     res.status(501);
@@ -50,7 +55,24 @@ router.post("/user", async (req, res) => {
     }
   });
 });
-
-
-
+router.delete("/user/:firstname", async(req, res) => {
+  const first_name_parameter = req.params["firstname"];
+  User.deleteOne({firstName:first_name_parameter},function(err,result){
+    if(err)
+    {
+        res.send(err);
+    }
+    else{ 
+        res.send("deleted");
+    }
+});
+});
+router.put("/user/:firstname",async function(req,res,next){
+  User.findOneAndUpdate({firstName:req.params["firstname"]},req.body).then(function(user){
+    User.findOne({firstName:req.params.firstname}).then(function(user){
+      res.send(user);
+    });
+  });
+});
+ 
 module.exports = router;
